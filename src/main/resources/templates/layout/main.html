@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<meta charset="UTF-8">
+	<title>Title</title>
+
+	<!--	Bootstrap css-->
+	<link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+
+	<!--	Css-->
+	<link rel="stylesheet" th:href="@{/css/style-main.css}">
+
+</head>
+<body>
+<div class="container-fluid">
+	<!--	Navbar-->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+		<a class="navbar-brand" href="#">Navbar</a>
+	</nav>
+
+	<!--	body content-->
+	<div class="row">
+		<!--		Dashboard-->
+		<div class="col-md-2 px-0 py-2 dashboard">
+
+		</div>
+
+		<!--		Content-->
+		<div class="col-md-10 py-2">
+			<!--			content-->
+			<div class="content" layout:fragment="content">
+
+			</div>
+		</div>
+	</div>
+</div>
+<!--  jquery-->
+<script th:src="@{/js/jquery.js}"></script>
+<!--  bootstrap js-->
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+
+</body>
+</html>

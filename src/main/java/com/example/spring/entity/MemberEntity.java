@@ -3,7 +3,6 @@ package com.example.spring.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -35,9 +34,6 @@ public class MemberEntity {
     private String email;
 
     private String description;
-
-    @Column(length=5, nullable=false)
-    private String role; //admin or user
 
     @Column(name="created_date", length=200, nullable=false, updatable=false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDate createdDate;

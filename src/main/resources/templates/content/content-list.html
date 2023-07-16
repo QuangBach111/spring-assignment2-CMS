@@ -1,10 +1,65 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	  layout:decorate="~{/layout/main}"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 	<meta charset="UTF-8">
-	<title>Title</title>
+	<title>Contents List</title>
 </head>
 <body>
+<div layout:fragment="content">
+
+	<div class="w-100">
+		<!--		Search field-->
+		<form class="form-inline"
+			  method="get"
+			  th:action="@{/content/search}">
+			<input name="keyword" class="form-control mr-sm-2" type="search" placeholder="Search"
+				   aria-label="Search">
+			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+		</form>
+
+		<!--		Add new content-->
+		<div class="my-3">
+			<a class="btn btn-primary" th:href="@{/content/add}">Add New Content</a>
+
+		</div>
+
+		<!--		Form-->
+		<form method="get"
+			  th:action="@{/content/feature-type/}"
+			  id="form">
+
+			<table class="table">
+				<thead>
+				<tr class="table-secondary">
+					<th scope="col">#</th>
+					<th scope="col">Title</th>
+					<th scope="col">Brief</th>
+					<th scope="col">Created Date</th>
+
+				</tr>
+				</thead>
+
+				<tbody>
+				<tr th:each="content_entity :${contents}">
+					<th scope="row"><input type="checkbox" name="selectedContentIds" th:value="${content_entity.contentId}"></th>
+					<td th:text="${content_entity.title}"></td>
+					<td th:text="${content_entity.brief}"></td>
+					<td th:text="${content_entity.createdDate}"></td>
+
+				</tr>
+				</tbody>
+			</table>
+
+			<!--			Button submit-->
+			<button class="btn btn-danger" id="btn-delete" type="submit" name="type" value="delete">Delete</button>
+
+		</form>
+
+
+	</div>
+</div>
 
 </body>
 </html>

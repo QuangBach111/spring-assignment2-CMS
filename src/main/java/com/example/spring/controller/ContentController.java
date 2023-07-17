@@ -35,35 +35,7 @@ public class ContentController {
         return "content-list";
     }
 
-//    @GetMapping("/feature-type")
-//    public String determineFeature(@RequestParam(value = "selectedContentIds", required = false) List<String> selectedContentIds,
-//                                   @RequestParam("type") String type,
-//                                   @RequestParam(value = "pageNo", required = false) String pageNo,
-//                                   Model model) {
-//        int pageNumber = 1;
-//
-//        if (selectedContentIds == null) {
-//            return "redirect:/user/list/" + pageNo;
-//        }
-//        if (pageNo != null) {
-//            pageNumber = Integer.parseInt(pageNo);
-//        }
-//
-//        List<Long> contentIdCollection = selectedContentIds.stream()
-//                .map(contentId -> Long.parseLong(contentId))
-//                .collect(Collectors.toList());
-//
-//        if (type.equals("delete")) {
-//            return deleteContent(contentIdCollection, pageNumber);
-//        }
-//
-//        if (type.equals("disable")) {
-//            return disableUser(userIdCollection, pageNumber);
-//        }
-//
-//        return enableUser(userIdCollection, pageNumber);
-//    }
-
+    
 
 
 

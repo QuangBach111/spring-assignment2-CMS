@@ -11,7 +11,7 @@ public interface ContentService {
     Optional<ContentEntity> getContentById(Long id);
     void createOrUpdateContent(ContentEntity content);
     void deleteContentById(Long id);
-    void deleteContentsById(List<Long> contentIds);
+
     Page<ContentEntity> findPaginated(int pageNo, int pageSize);
     List<ContentEntity> searchContentsByKeyword(String keyword);
 }

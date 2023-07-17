@@ -5,6 +5,8 @@ import com.example.spring.repository.ContentRepository;
 import com.example.spring.service.ContentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,20 +35,19 @@ public class ContentServiceImpl implements ContentService {
     public void deleteContentById(Long id) {
         this.contentRepository.deleteById(id);
     }
-    @Transactional
-    @Override
-    public void deleteContentsById(List<Long> contentIds) {
-        this.contentRepository.deleteContentByIdIn(contentIds);
-    }
 
 
     @Override
     public Page<ContentEntity> findPaginated(int pageNo, int pageSize) {
-        return null;
+        Pageable pageable = PageRequest.of(pageNo - 1, pageSize);
+        return contentRepository.findAll(pageable);
     }
+
 
     @Override
     public List<ContentEntity> searchContentsByKeyword(String keyword) {
-        return null;
+        return contentRepository.findByKeyword(keyword);
     }
+
+
 }

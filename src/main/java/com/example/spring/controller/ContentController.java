@@ -69,11 +69,6 @@ public class ContentController {
 
 
 
-    private String deleteContent(List<Long> contentIds, int pageNo) {
-        this.contentService.deleteContentsById(contentIds);
-
-        return "redirect:/content/list/" + pageNo;
-    }
 
 
 }

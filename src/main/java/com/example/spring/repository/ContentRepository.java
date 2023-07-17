@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface ContentRepository extends JpaRepository<ContentEntity, Long> {
-   void deleteContentByIdIn(List<Long> contentId);
+
 
     @Query("SELECT c FROM ContentEntity c " +
             "WHERE c.title like %?1% " +

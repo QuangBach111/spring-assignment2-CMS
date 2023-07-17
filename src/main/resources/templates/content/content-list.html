@@ -6,65 +6,93 @@
 	<meta charset="UTF-8">
 	<title>Contents List</title>
 
-	<!--	Bootstrap css-->
-	<link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+<!--	&lt;!&ndash; Bootstrap CSS &ndash;&gt;-->
+<!--	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">-->
 
-	<!--	Css-->
-	<link rel="stylesheet" th:href="@{/css/style-main.css}">
+	<!-- Custom CSS -->
+<!--	<link rel="stylesheet" th:href="@{/css/style-main.css}">-->
+
+	<!-- Custom Animations CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 </head>
 <body>
-<div layout:fragment="content">
 
-	<div class="w-100">
-		<!--		Search field-->
-		<form class="form-inline"
-			  method="get"
-			  th:action="@{/content/search}">
-			<input name="keyword" class="form-control mr-sm-2" type="search" placeholder="Search"
-				   aria-label="Search">
-			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-		</form>
+<h1 style="text-align: center">View Content</h1>
+<hr>
+<div class="container">
+	<div layout:fragment="content" class="animated fadeIn">
+		<div class="w-100">
+			<!-- Search field -->
+			<form class="form-inline animated fadeIn" method="get" th:action="@{/content/search}">
+				<input name="keyword" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+				<button class="btn btn-outline-success my-2 my-sm-0 animated-hover bounce" type="submit">Search</button>
+			</form>
 
-		<!--		Add new content-->
-		<div class="my-3">
-			<a class="btn btn-primary" th:href="@{/content/add}">Add New Content</a>
+			<!-- Add new content -->
+			<div class="my-3 animated fadeIn delay-1s">
+				<a class="btn btn-outline-primary animated-hover bounce" th:href="@{/content/add}">Add New Content</a>
+			</div>
 
+			<!-- Form -->
+			<form method="post" th:action="@{/content/delete}" id="form">
+				<input type="hidden" name="_method" value="delete">
+				<table class="table table-bordered table-hover animated fadeIn delay-1s">
+					<thead class="thead-dark">
+					<tr>
+						<th scope="col">#</th>
+
+						<th scope="col">Title</th>
+						<th scope="col">Brief</th>
+						<th scope="col">Created Date</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr th:each="content_entity :${contents}">
+						<td th:scope="row"><input type="checkbox" name="selectedContentIds" th:value="${content_entity.contentId}"></td>
+
+						<td th:text="${content_entity.title}"></td>
+						<td th:text="${content_entity.brief}"></td>
+						<td th:text="${content_entity.createdDate}"></td>
+
+					</tr>
+					</tbody>
+				</table>
+
+				<!-- Button submit -->
+				<button class="btn btn-outline-danger animated-hover bounce" id="btn-delete" type="submit" name="type" value="delete">Delete</button>
+
+
+			</form>
 		</div>
-
-		<!--		Form-->
-		<form method="get"
-			  th:action="@{/content/feature-type/}"
-			  id="form">
-
-			<table class="table">
-				<thead>
-				<tr class="table-secondary">
-					<th scope="col">#</th>
-					<th scope="col">Title</th>
-					<th scope="col">Brief</th>
-					<th scope="col">Created Date</th>
-				</tr>
-				</thead>
-
-				<tbody>
-				<tr th:each="content_entity :${contents}">
-					<th scope="row"><input type="checkbox" name="selectedContentIds" th:value="${content_entity.contentId}"></th>
-					<td th:text="${content_entity.title}"></td>
-					<td th:text="${content_entity.brief}"></td>
-					<td th:text="${content_entity.createdDate}"></td>
-
-				</tr>
-				</tbody>
-			</table>
-
-			<!--			Button submit-->
-			<button class="btn btn-danger" id="btn-delete" type="submit" name="type" value="delete">Delete</button>
-
-		</form>
-
-
 	</div>
 </div>
+
+<!-- Bootstrap JS -->
+<!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
+
+<script>
+	document.getElementById('btn-delete').addEventListener('click', function (event) {
+		event.preventDefault(); // Prevent the form from submitting directly
+
+		var checkboxes = document.getElementsByName('selectedContentIds');
+		var checkedCount = 0;
+
+		for (var i = 0; i < checkboxes.length; i++) {
+			if (checkboxes[i].checked) {
+				checkedCount++;
+			}
+		}
+
+		if (checkedCount === 0) {
+			alert('Please select at least one content to delete.');
+		} else if (confirm('Are you sure you want to delete the selected contents?')) {
+			document.getElementById('form').method = 'post'; // Set the form method to POST
+			document.getElementById('form').submit(); // Submit the form
+		}
+	});
+</script>
+
+
 
 </body>
 </html>

@@ -70,27 +70,6 @@
 <!-- Bootstrap JS -->
 <!--<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>-->
 
-<script>
-	document.getElementById('btn-delete').addEventListener('click', function (event) {
-		event.preventDefault(); // Prevent the form from submitting directly
-
-		var checkboxes = document.getElementsByName('selectedContentIds');
-		var checkedCount = 0;
-
-		for (var i = 0; i < checkboxes.length; i++) {
-			if (checkboxes[i].checked) {
-				checkedCount++;
-			}
-		}
-
-		if (checkedCount === 0) {
-			alert('Please select at least one content to delete.');
-		} else if (confirm('Are you sure you want to delete the selected contents?')) {
-			document.getElementById('form').method = 'post'; // Set the form method to POST
-			document.getElementById('form').submit(); // Submit the form
-		}
-	});
-</script>
 
 
 

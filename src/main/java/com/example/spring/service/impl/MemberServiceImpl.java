@@ -1,15 +1,19 @@
 package com.example.spring.service.impl;
 
 import com.example.spring.entity.MemberEntity;
+import com.example.spring.repository.MemberRepository;
 import com.example.spring.service.MemberService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 @Service
 public class MemberServiceImpl implements MemberService {
+    @Autowired
+    private MemberRepository memberRepository;
     @Override
     public Optional<MemberEntity> loginMember(String email, String password) {
-        return Optional.empty();
+        return this.memberRepository.findByEmailAndPassword(email, password);
     }
 
     @Override

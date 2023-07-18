@@ -9,4 +9,8 @@ public interface MemberService {
     Optional<MemberEntity> registerMember(String email, String userName);
     Optional<MemberEntity> findMemberById(Long id);
     void updateMember(MemberEntity member);
+    MemberEntity getOne(int id);
+
+
+
 }

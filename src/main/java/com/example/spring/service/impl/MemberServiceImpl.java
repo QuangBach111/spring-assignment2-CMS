@@ -35,4 +35,9 @@ public class MemberServiceImpl implements MemberService {
     public void updateMember(MemberEntity member) {
         memberRepository.save(member);
     }
+
+    @Override
+    public MemberEntity getOne(int id) {
+        return memberRepository.getReferenceById((long) id);
+    }
 }

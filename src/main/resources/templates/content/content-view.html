@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" layout:decorate="~{/layout/main}" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Content View</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <style>
+    body {
+      padding-top: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .section-box {
+      border: 1px solid #e9e9e9;
+      border-radius: 5px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .section-heading {
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+  <div layout:fragment="content-view" class="animated fadeIn">
+    <h1 class="section-heading">Content View</h1>
+    <hr>
+    <div class="row">
+      <div class="col-md-12 section-box">
+        <h5 class="section-heading d-inline">Title:</h5>
+        <p class="d-inline" th:text="${content.title}"></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 section-box">
+        <h5 class="section-heading d-inline">Brief:</h5>
+        <p class="d-inline" th:text="${content.brief}"></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 section-box">
+        <h5 class="section-heading d-inline">Content:</h5>
+        <p class="d-inline" th:text="${content.content}"></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12 section-box">
+        <h5 class="section-heading d-inline">Created Date:</h5>
+        <p class="d-inline" th:text="${content.createdDate}"></p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-12">
+        <a class="btn btn-primary" href="/content/list/1">Back</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>

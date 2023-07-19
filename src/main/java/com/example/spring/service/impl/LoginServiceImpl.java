@@ -17,15 +17,11 @@ public class LoginServiceImpl implements LoginService {
 
     @Autowired
     private JwtUtil jwtUtil;
+
     @Override
     public String doLogin(LoginRequestDTO loginRequestDTO) {
         Optional<MemberEntity> memberEntity = memberRepository.findByEmailAndPassword(loginRequestDTO.getEmail(), loginRequestDTO.getPassword());
 
-        // Not correct
-        if(!memberEntity.isPresent()) {
-            return null;
-        }
-        //return token
-        return jwtUtil.generateJwt(memberEntity.get());
+        return memberEntity.isPresent() ? jwtUtil.generateJwt(memberEntity.get()) : null;
     }
 }

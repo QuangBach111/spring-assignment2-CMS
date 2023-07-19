@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -50,18 +52,14 @@ public class ContentController {
 
     @GetMapping("/view/{contentId}")
     public String viewContent(@PathVariable("contentId") Long contentId, Model model) {
-        Optional<ContentEntity> content = contentService.getContentById(contentId);
-        if (content.isPresent()) {
-            model.addAttribute("content", content.get());
+        ContentEntity content = contentService.getContentById(contentId);
+        if (content != null) {
+            model.addAttribute("content", content);
             return "content/content-view";
         } else {
             return "redirect:/content/list/1";
         }
     }
-
-
-
-
 
     @GetMapping("/search")
     public String searchContent(@RequestParam("keyword") String keyword, Model model) {
@@ -75,8 +73,31 @@ public class ContentController {
         return "content/content-search";
     }
 
-
-
+    private static final String REDIRECT_LOCATION = "redirect:/content/list/1";
+    @GetMapping("/")
+    public String home(Model model){
+        return "layout/main";
+    }
+    @GetMapping("/add-content")
+    public String addContent(Model model){
+        model.addAttribute("content", new ContentEntity());
+        return "content/content-add";
+    }
+    @PostMapping("/save-content")
+    public String saveContent(@ModelAttribute ContentEntity contentEntity, BindingResult result, Model model){
+        this.contentService.addContent(contentEntity);
+        return REDIRECT_LOCATION;
+    }
+    @GetMapping("/show-form-update")
+    public String showFormForUpdate(@RequestParam int contentId, Model model){
+        model.addAttribute("content", this.contentService.getContentById((long) contentId));
+        return "content/content-edit";
+    }
+    @PostMapping("/update-content")
+    public String doUpdateContent(@ModelAttribute ContentEntity contentEntity, BindingResult bindingResult, Model model){
+        this.contentService.updateContent(contentEntity);
+        return REDIRECT_LOCATION;
+    }
 
 
 

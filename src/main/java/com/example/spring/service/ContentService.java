@@ -8,10 +8,15 @@ import org.springframework.data.domain.Page;
 
 public interface ContentService {
     List<ContentEntity> getAllContents();
-    Optional<ContentEntity> getContentById(Long id);
+    ContentEntity getContentById(Long id);
     void createOrUpdateContent(ContentEntity content);
     void deleteContentById(Long id);
 
     Page<ContentEntity> findPaginated(int pageNo, int pageSize);
     List<ContentEntity> searchContentsByKeyword(String keyword);
+
+    public void addContent(ContentEntity contentEntity);
+
+    public void updateContent(ContentEntity contentEntity);
+
 }

@@ -22,9 +22,13 @@ public class ContentServiceImpl implements ContentService {
     }
 
     @Override
-    public Optional<ContentEntity> getContentById(Long id) {
-        return this.contentRepository.findById(id);
+    public ContentEntity getContentById(Long id) {
+        Optional<ContentEntity> optionalContent= this.contentRepository.findById(id);
+        if(optionalContent.isPresent())
+            return  optionalContent.get();
+        return new ContentEntity();
     }
+
 
     @Override
     public void createOrUpdateContent(ContentEntity content) {
@@ -47,6 +51,15 @@ public class ContentServiceImpl implements ContentService {
     @Override
     public List<ContentEntity> searchContentsByKeyword(String keyword) {
         return contentRepository.findByKeyword(keyword);
+    }
+    @Override
+    public void addContent(ContentEntity contentEntity) {
+        contentRepository.save(contentEntity);
+    }
+
+    @Override
+    public void updateContent(ContentEntity contentEntity) {
+        contentRepository.save(contentEntity);
     }
 
 

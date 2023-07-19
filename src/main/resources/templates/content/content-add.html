@@ -1,10 +1,42 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	  layout:decorate="~{/layout/main}"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 	<meta charset="UTF-8">
-	<title>Title</title>
+	<title>Add Content</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.css}"/>
+	<!--	Bootstrap css-->
+	<link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+
+	<!--	Css-->
+	<link rel="stylesheet" th:href="@{/css/style-main.css}">
 </head>
 <body>
+<div layout:fragment="content-add">
+	<form th:action="@{/content/save-content}" method="post" th:object="${content}" class="w-50" style="margin: auto">
+	<h1>Add Content</h1>
+	<div class="form-row">
+		<div class="form-group w-100">
+			<label for="inputTitle">Title</label>
+			<input type="text" th:field="*{title}" class="form-control" id="inputTitle" placeholder="Enter the title">
+			<p th:if="${#fields.hasErrors('title')}" th:errorclass="error" th:errors="*{title}" />
+		</div>
+		<div class="form-group w-100">
+			<label for="inputBrief">Brief</label>
+			<textarea th:field="*{brief}" class="form-control" id="inputBrief" rows="10" cols="30"></textarea>
+			<p th:if="${#fields.hasErrors('brief')}" th:errorclass="error" th:errors="*{brief}" />
+		</div>
+		<div class="form-group w-100">
+			<label for="inputContent">Content</label>
+			<textarea th:field="*{content}" class="form-control" id="inputContent" rows="10" cols="30"></textarea>
+			<p th:if="${#fields.hasErrors('content')}" th:errorclass="error" th:errors="*{content}" />
+		</div>
+	</div>
+	<button type="submit" class="btn btn-primary">Add</button>
+	<button type="submit" class="btn btn-secondary">Reset</button>
+</form>
+</div>
 
 </body>
 </html>

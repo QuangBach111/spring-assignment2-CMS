@@ -37,6 +37,8 @@ public class LoginController {
         if(accessToken == null) {
             return "login/login-form";
         }
+
+        // Store accessToken in session
         model.addAttribute("accessToken", accessToken);
         return "redirect:/content";
     }

@@ -52,10 +52,10 @@
             <td th:text="${content_entity.brief}"></td>
             <td th:text="${content_entity.createdDate}"></td>
             <td> <!-- Actions column -->
-              <button class="btn btn-outline-danger btn-sm" th:attr="data-contentid=${content_entity.contentId}" onclick="confirmDelete(this)">Delete</button>
-              <a class="btn btn-outline-warning btn-sm" th:href="@{/content/view/{contentId}(contentId=${content_entity.contentId})}"
-                 style="background-color: yellow; color: black;">View</a>
-              <a class="btn btn-outline-primary btn-sm" href="#" style="background-color: blue; color: white;">Edit</a> <!-- Edit button -->
+              <button class="btn btn-outline-danger btn-sm animated-hover bounce" th:attr="data-contentid=${content_entity.contentId}" onclick="confirmDelete(this)">Delete</button>
+              <a class="btn btn-outline-warning btn-sm animated-hover bounce" th:href="@{/content/view/{contentId}(contentId=${content_entity.contentId})}"
+              >View</a>
+              <a class="btn btn-outline-primary btn-sm animated-hover bounce" th:href="@{/content/edit/{contentId}(contentId=${content_entity.contentId})}">Edit</a>
             </td>
           </tr>
           </tbody>

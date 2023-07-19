@@ -1,7 +1,8 @@
 package com.example.spring.controller;
 
+import com.example.spring.dto.LoginRequestDTO;
 import com.example.spring.entity.MemberEntity;
-import com.example.spring.model.Login;
+import com.example.spring.service.LoginService;
 import com.example.spring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,28 +15,29 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @Controller
-@SessionAttributes("LoginAu")
+@SessionAttributes("accessToken")
 public class LoginController {
     @Autowired
-    private MemberService memberService;
+    private LoginService loginService;
     @GetMapping("/login")
-    public String showLogin(@ModelAttribute("newLogin") Login login) {
+    public String showLogin(@ModelAttribute("newLogin") LoginRequestDTO loginDTO) {
         return "login/login-form";
     }
 
     @PostMapping("/login")
-    public String doLogin(@Valid @ModelAttribute("newLogin") Login login,
+    public String login(@Valid @ModelAttribute("newLogin") LoginRequestDTO loginDTO,
                           BindingResult result,
                           Model model) {
+        // error
         if(result.hasErrors()) {
             return "login/login-form";
         }
-        Optional<MemberEntity> member = this.memberService.loginMember(login.getEmail(), login.getPassword());
-        if(!member.isPresent()) {
-            model.addAttribute("error", "{errorMessage}");
+
+        String accessToken = loginService.doLogin(loginDTO);
+        if(accessToken == null) {
             return "login/login-form";
         }
-        model.addAttribute("LoginAu", login);
+        model.addAttribute("accessToken", accessToken);
         return "redirect:/content";
     }
 

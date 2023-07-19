@@ -11,7 +11,7 @@
 
 
 	<form class="col-sm-5 m-auto my-lg-5"
-			method="post"
+	      method="post"
 	      th:action="@{/login}"
 	      th:object="${newLogin}">
 		<div th:if="error != null" th:text="${error}" th:attr="class=${error != null ? 'alert alert-danger' : ''}">

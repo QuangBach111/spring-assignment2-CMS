@@ -58,7 +58,9 @@
 							<button class="btn btn-outline-danger btn-sm animated-hover bounce" th:attr="data-contentid=${content_entity.contentId}" onclick="confirmDelete(this)">Delete</button>
 							<a class="btn btn-outline-warning btn-sm animated-hover bounce" th:href="@{/content/view/{contentId}(contentId=${content_entity.contentId})}"
 							   >View</a>
-							<a class="btn btn-outline-primary btn-sm animated-hover bounce" th:href="@{/content/show-form-update(contentId=${content_entity.contentId})}">Edit</a>
+							<a class="btn btn-outline-primary btn-sm animated-hover bounce" th:href="@{/content/edit/{contentId}(contentId=${content_entity.contentId})}">Edit</a>
+
+
 
 						</td>
 					</tr>
@@ -87,9 +89,6 @@
 				</div>
 
 
-
-				<!-- Button submit -->
-				<button class="btn btn-outline-danger animated-hover bounce" id="btn-delete" type="submit" name="type" value="delete">Delete</button>
 			</form>
 		</div>
 	</div>

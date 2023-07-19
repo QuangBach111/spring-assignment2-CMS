@@ -89,7 +89,7 @@ public class ContentController {
         return REDIRECT_LOCATION;
     }
     @GetMapping("/show-form-update")
-    public String showFormForUpdate(@RequestParam int contentId, Model model){
+    public String showFormForUpdate(@RequestParam int contentId, Model model) {
         model.addAttribute("content", this.contentService.getContentById((long) contentId));
         return "content/content-edit";
     }
@@ -99,6 +99,26 @@ public class ContentController {
         return REDIRECT_LOCATION;
     }
 
+    @GetMapping("/edit/{contentId}")
+    public String showEditForm(@PathVariable("contentId") Long contentId, Model model) {
+        ContentEntity content = contentService.getContentById(contentId);
+        if (content != null) {
+            model.addAttribute("content", content);
+            return "content/content-edit";
+        } else {
+            return "redirect:/content/list/1";
+        }
+    }
+
+//    @PostMapping("/update-content")
+//    public String updateContent(@ModelAttribute ContentEntity contentEntity, BindingResult bindingResult, Model model) {
+//        if (bindingResult.hasErrors()) {
+//            return "content/content-edit";
+//        }
+//
+//        contentService.updateContent(contentEntity);
+//        return "redirect:/content/list/1";
+//    }
 
 
     }

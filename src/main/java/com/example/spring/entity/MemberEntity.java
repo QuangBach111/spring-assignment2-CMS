@@ -18,19 +18,16 @@ public class MemberEntity {
     @Column(name="member_id", updatable=false)
     private Long memberId;
 
-    @Column(name="first_name", length=100)
+    @Column(name="first_name", length=100, nullable=false)
     private String firstName;
 
-    @Column(name="last_name", length=100)
+    @Column(name="last_name", length=100, nullable=false)
     private String lastName;
-
-    @Column(name = "username", nullable = false, length = 255)
-    private String username;
 
     @Column(name="password", length=100, nullable=false)
     private String password;
 
-    @Column(name="phone", length=100, unique=true)
+    @Column(name="phone", length=100, nullable=false, unique=true)
     private String phone;
 
     @Column(name="email", length=100, nullable=false, unique=true)

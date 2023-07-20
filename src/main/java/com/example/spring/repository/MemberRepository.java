@@ -8,12 +8,9 @@ import java.util.Optional;
 
 @Repository
 public interface MemberRepository extends JpaRepository<MemberEntity, Long> {
-
-    MemberEntity findByEmail(String email);
-    MemberEntity findByUsername(String username);
-
     @Override
     Optional<MemberEntity> findById(Long id);
 
     Optional<MemberEntity> findByEmailAndPassword(String email, String password);
+
 }

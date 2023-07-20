@@ -16,13 +16,6 @@ public class MemberController {
     private MemberService memberService;
 
     public static final String ATTRIBUTE_MEMBER_NAME="member";
-    @GetMapping("/user-profile")
-    public String viewUserProfile(Model model){
-        model.addAttribute(ATTRIBUTE_MEMBER_NAME, model );
-        return "member/profile-view";
-    }
-
-
 
     @GetMapping("/view-information")
     public String viewInformation(@RequestParam int id  , Model model){

@@ -2,9 +2,34 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8">
-	<title>Title</title>
+	<title>Login</title>
+	<!--	Bootstrap css-->
+	<link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
 </head>
 <body>
+<div class="row">
 
+
+	<form class="col-sm-5 m-auto my-lg-5"
+	      method="post"
+	      th:action="@{/login}"
+	      th:object="${newLogin}">
+		<div th:if="error != null" th:text="${error}" th:attr="class=${error != null ? 'alert alert-danger' : ''}">
+		</div>
+		<div class="form-group">
+			<label>Email</label>
+			<input th:field="*{email}" type="email" class="form-control" id="email" placeholder="Email">
+			<p class="text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+		</div>
+		<div class="form-group">
+			<label>Password</label>
+			<input th:field="*{password}" type="password" class="form-control" id="exampleInputPassword1"
+			       placeholder="Password">
+			<p class="text-danger" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+		</div>
+		<button type="submit" class="btn btn-primary">Login</button>
+		<a th:href="@{/register}">Click here to Register</a>
+	</form>
+</div>
 </body>
 </html>

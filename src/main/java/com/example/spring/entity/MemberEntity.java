@@ -33,12 +33,15 @@ public class MemberEntity {
     @Column(name="email", length=100, nullable=false, unique=true)
     private String email;
 
+    @Column(columnDefinition="varchar(10) DEFAULT 'USER'")
+    private String role;
+
     private String description;
 
     @Column(name="created_date", length=200, nullable=false, updatable=false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDate createdDate;
 
-    @Column(name="updated_time", nullable=false, updatable=true, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    @Column(name="updated_time", nullable=false, updatable=false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private LocalDate updatedTime;
 
     @OneToMany(mappedBy="member")

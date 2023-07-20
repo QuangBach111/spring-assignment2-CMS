@@ -15,31 +15,81 @@
 <div th:fragment="html_navbar">
     <nav class="navbar navbar-light bg-light justify-content-between">
         <a th:href="@{content/view-content.html}" class="navbar-brand">CMS</a>
-        <form class="form-inline">
-            <span>
+        <form th:switch="${#session.getAttribute('RequestMeta.role')}" class="form-inline">
+            <span th:case="'null'">
               <div class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
                      aria-expanded="false">
-                    <i class="fa fa-user"></i>
+                    <i class="fa-solid fa-bars"></i> Menu
+                  </a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" th:href="@{login/login.html}">
+                      <i class="fa-solid fa-right-to-bracket"></i> Login
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" th:href="@{register/register.html}">
+                      <i class="fa-solid fa-registered"></i> Register
+                    </a>
+                  </div>
+                </div>
+            </span>
+            <span th:case="'MEMBER'">
+              <div class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                     aria-expanded="false">
+                    <i class="fa-solid fa-user"></i> <span th:text="${member.getFirstName + ' ' + member.getLastName}"></span>
                   </a>
                   <div class="dropdown-menu">
                     <a class="dropdown-item"
-                       th:href="@{/member/view-information(id=${member.id})}">
+                       th:href="@{profile/view-profile.html}">
                       <i class="fa-solid fa-user"></i> User Profile
                     </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item"
-                       th:href="@{/member/show-form-update(id=${member.id})}">
-                      <i class="fa-solid fa-user-pen"></i> Edit Profile
+                       th:href="@{profile/edit-profile.html}">
+                      <i class="fa-solid fa-pen-to-square"></i> Edit Profile
                     </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item"
-                       th:href="@{member/change-password.html}">
-                      <i class="fa-solid fa-lock"></i> Change password
+                       th:href="@{profile/change-password.html}">
+                      <i class="fa-solid fa-pen-to-square"></i> Change password
                     </a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item">
-                      <i class="fa-solid fa-right-to-bracket"></i> Logout
+                      <i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </a>
+                  </div>
+                </div>
+            </span>
+            <span th:case="'ADMIN'">
+              <div class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                     aria-expanded="false">
+                    <i class="fa-solid fa-user"></i> <span th:utext="Admin"></span>
+                  </a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item"
+                       th:href="@{profile/view-profile.html}">
+                      <i class="fa-solid fa-user"></i> Admin Profile
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item"
+                       th:href="@{profile/edit-profile.html}">
+                      <i class="fa-solid fa-pen-to-square"></i> Edit Profile
+                    </a>
+                    <div class="dropdown-divider"></div>
+                      <a class="dropdown-item"
+                         th:href="@{member/view-member.html}">
+                      <i class="fa-solid fa-user"></i> View Member
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item"
+                       th:href="@{profile/change-password.html}">
+                      <i class="fa-solid fa-pen-to-square"></i> Change password
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item">
+                      <i class="fa-solid fa-right-from-bracket"></i> Logout
                     </a>
                   </div>
                 </div>

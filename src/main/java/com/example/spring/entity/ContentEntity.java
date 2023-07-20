@@ -22,7 +22,7 @@ public class ContentEntity {
     @Column(length=200, nullable=false)
     private String brief;
 
-    @Column(length=200, nullable=false)
+    @Column(length=2000, nullable=false) // Adjusted the length to accommodate larger content
     private String content;
 
     @Column(name="created_date", length=200, nullable=false, updatable=false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")

@@ -1,10 +1,100 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+	  layout:decorate="~{/layout/main}"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 	<meta charset="UTF-8">
-	<title>Title</title>
+	<title>Contents List</title>
+
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+
+	<!-- Custom CSS -->
+	<link rel="stylesheet" th:href="@{/css/style-main.css}">
+
+	<!-- Custom Animations CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
 </head>
 <body>
 
+<h1 style="text-align: center">View Content</h1>
+<hr>
+<div class="container">
+	<div layout:fragment="content">
+		<h1>Content List</h1>
+		<div class="w-100">
+			<!-- Search field -->
+			<form class="form-inline animated fadeIn" method="get" th:action="@{/content/search}">
+				<input name="keyword" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+				<button class="btn btn-outline-success my-2 my-sm-0 animated-hover bounce" type="submit">Search</button>
+			</form>
+
+			<!-- Add new content -->
+			<div class="my-3 animated fadeIn delay-1s">
+				<a class="btn btn-outline-primary animated-hover bounce" th:href="@{/content/add-content}">Add New
+					Content</a>
+			</div>
+
+			<!-- Form -->
+			<form method="post" th:action="@{/content/delete}" id="form">
+				<input type="hidden" name="_method" value="delete">
+				<table class="table table-bordered table-hover animated fadeIn delay-1s">
+					<thead class="thead-dark">
+					<tr>
+						<th scope="col">#</th>
+						<th scope="col">Title</th>
+						<th scope="col">Brief</th>
+						<th scope="col">Created Date</th>
+						<th scope="col">Actions</th> <!-- Added Actions column header -->
+					</tr>
+					</thead>
+					<tbody>
+					<tr th:each="content_entity, rowStat : ${contents}">
+						<td th:scope="row"><input type="checkbox" name="selectedContentIds" th:value="${content_entity.contentId}"></td>
+						<td th:text="${content_entity.title}"></td>
+						<td th:text="${content_entity.brief}"></td>
+						<td th:text="${content_entity.createdDate}"></td>
+						<td> <!-- Actions column -->
+							<button class="btn btn-outline-danger btn-sm animated-hover bounce" th:attr="data-contentid=${content_entity.contentId}" onclick="confirmDelete(this)">Delete</button>
+							<a class="btn btn-outline-warning btn-sm animated-hover bounce" th:href="@{/content/view/{contentId}(contentId=${content_entity.contentId})}"
+							   >View</a>
+							<a class="btn btn-outline-primary btn-sm animated-hover bounce" th:href="@{/content/edit/{contentId}(contentId=${content_entity.contentId})}">Edit</a>
+
+
+
+						</td>
+					</tr>
+					</tbody>
+				</table>
+				<!--Index-->
+				<div class="pagination justify-content-center">
+					<ul class="pagination">
+						<li th:class="${currentPage == 1} ? 'page-item disabled' : 'page-item'">
+							<a class="page-link" th:href="@{/content/list/1}">First</a>
+						</li>
+						<li th:class="${currentPage == 1} ? 'page-item disabled' : 'page-item'">
+							<a class="page-link" th:href="@{/content/list/__${currentPage - 1}__}">Previous</a>
+						</li>
+						<li th:each="page : ${#numbers.sequence(1, totalPages)}"
+							th:class="${page == currentPage} ? 'page-item active' : 'page-item'">
+							<a class="page-link" th:href="@{/content/list/__${page}__}" th:text="${page}"></a>
+						</li>
+						<li th:class="${currentPage == totalPages} ? 'page-item disabled' : 'page-item'">
+							<a class="page-link" th:href="@{/content/list/__${currentPage + 1}__}">Next</a>
+						</li>
+						<li th:class="${currentPage == totalPages} ? 'page-item disabled' : 'page-item'">
+							<a class="page-link" th:href="@{/content/list/__${totalPages}__}">Last</a>
+						</li>
+					</ul>
+				</div>
+
+
+			</form>
+		</div>
+	</div>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>

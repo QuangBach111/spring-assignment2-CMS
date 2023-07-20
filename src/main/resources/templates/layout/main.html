@@ -7,7 +7,7 @@
 	<title>Title</title>
 
 	<!--	Bootstrap css-->
-	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
 
 	<!--	Css-->
 	<link rel="stylesheet" th:href="@{/css/style-main.css}">
@@ -29,9 +29,15 @@
 
 		<!--		Content-->
 		<div class="col-md-10 py-2">
-			<!--			content-->
+				<!--content-->
 			<div class="content" layout:fragment="content">
-				<!--				content-add ...-->
+				<!--content-view-->
+			<div class="content" layout:fragment="content-view"></div>
+				<!--content-add ...-->
+			<div class="content" layout:fragment="content-add"></div>
+				<!--content-edit-->
+			<div class="content" layout:fragment="content-edit"></div>
+
 			</div>
 		</div>
 	</div>
@@ -39,7 +45,8 @@
 <!--  jquery-->
 <script th:src="@{/js/jquery.js}"></script>
 <!--  bootstrap js-->
-<script th:src="@{/js/bootstrap.min.js}"></script>
-
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<!-- Custom JS -->
+<script th:src="@{/js/content-list.js}"></script>	
 </body>
 </html>

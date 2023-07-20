@@ -36,6 +36,9 @@ public class MemberEntity {
     @Column(name="email", length=100, nullable=false, unique=true)
     private String email;
 
+    @Column(columnDefinition="varchar(10) DEFAULT 'USER'")
+    private String role;
+
     private String description;
 
     @Column(name="created_date", length=200, nullable=false, updatable=false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")

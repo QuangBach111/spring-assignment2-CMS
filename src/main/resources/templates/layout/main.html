@@ -7,39 +7,42 @@
 	<title>Title</title>
 
 	<!--	Bootstrap css-->
-	<link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}"/>
+	<link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
 
 	<!--	Css-->
 	<link rel="stylesheet" th:href="@{/css/style-main.css}">
 
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-<div class="container-fluid">
+<div class="container">
 	<!--	Navbar-->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+	<nav class="navbar navbar-expand-lg navbar-light bg-light d-flex justify-content-between">
 		<a class="navbar-brand" href="#">Navbar</a>
-	</nav>
 
-	<!--	body content-->
-	<div class="row">
-		<!--		Dashboard-->
-		<div class="col-md-2 px-0 py-2 dashboard">
-
-		</div>
-
-		<!--		Content-->
-		<div class="col-md-10 py-2">
-			<!--			content-->
-			<div class="content" layout:fragment="content">
-				<!--				content-add ...-->
+		<div class="nav-item dropdown">
+			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+			   aria-haspopup="true" aria-expanded="false">
+				<span th:if="${requestMeta == null}"><i class="fa-solid fa-user"></i></span>
+				<span th:unless="${requestMeta == null}" th:text="${requestMeta.role}"></span>
+			</a>
+			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				<a class="dropdown-item" th:if="${requestMeta == null}" th:href="@{/login}">Login</a>
+				<a class="dropdown-item" th:unless="${requestMeta == null}" th:href="@{/member/view-information(id=${requestMeta.memberId})}">User Detail</a>
+				<div class="dropdown-divider"></div>
+				<a class="dropdown-item" th:unless="${requestMeta == null}" th:href="@{/logout}">Logout</a>
+				<a class="dropdown-item" th:if="${requestMeta == null}" th:href="@{#}">Register</a>
 			</div>
 		</div>
-	</div>
+	</nav>
+
+	<div layout:fragment="content"></div>
 </div>
 <!--  jquery-->
 <script th:src="@{/js/jquery.js}"></script>
 <!--  bootstrap js-->
-<script th:src="@{/js/bootstrap.min.js}"></script>
-
+<script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+<!-- Custom JS -->
+<script th:src="@{/js/content-list.js}"></script>
 </body>
 </html>

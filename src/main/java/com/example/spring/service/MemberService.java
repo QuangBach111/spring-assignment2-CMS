@@ -9,8 +9,11 @@ public interface MemberService {
     Optional<MemberEntity> loginMember(String email, String password);
     Optional<MemberEntity> registerMember(String email, String userName);
     Optional<MemberEntity> findMemberById(Long id);
+
     void createOrUpdateMember(MemberEntity member);
     MemberEntity findMemberByEmail(String email);
     MemberEntity findMemberByUsername(String username);
     void saveMember(Register register);
+    void updateMember(MemberEntity member);
+    MemberEntity getOne(int id);
 }

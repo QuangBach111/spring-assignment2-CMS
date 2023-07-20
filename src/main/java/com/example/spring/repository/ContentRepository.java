@@ -9,6 +9,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface ContentRepository extends JpaRepository<ContentEntity, Long> {
+
+
     @Query("SELECT c FROM ContentEntity c " +
             "WHERE c.title like %?1% " +
             "or c.brief like %?1% " +

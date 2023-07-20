@@ -23,7 +23,6 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
     private JwtUtil jwtUtil;
 
     @Override
-    @ModelAttribute("login")
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         // get accessToken
         Object auth = request.getSession().getAttribute("accessToken");

@@ -13,7 +13,7 @@ import java.util.Date;
 @Component
 public class JwtUtil {
     private static String secret = "This_is_secret";
-    private static long expiryDuration = 60 * 60;
+    private static long expiryDuration = 5 * 60 * 60;
 
     public String generateJwt(MemberEntity memberEntity) {
         // Determine expire

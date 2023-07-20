@@ -19,6 +19,7 @@ import java.util.Optional;
 public class LoginController {
     @Autowired
     private LoginService loginService;
+
     @GetMapping("/login")
     public String showLogin(@ModelAttribute("newLogin") LoginRequestDTO loginDTO) {
         return "login/login-form";
@@ -40,7 +41,7 @@ public class LoginController {
 
         // Store accessToken in session
         model.addAttribute("accessToken", accessToken);
-        return "redirect:/content";
+        return "redirect:/content/list/1";
     }
 
     @GetMapping("/logout")

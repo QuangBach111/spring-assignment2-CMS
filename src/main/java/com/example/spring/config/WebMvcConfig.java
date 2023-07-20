@@ -18,7 +18,7 @@ import java.util.Locale;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-    private final List<String> ignorePaths = Arrays.asList("/login", "/register", "/bootstrap/**", "/i18n/**", "/css/**", "/js/**");
+    private final List<String> ignorePaths = Arrays.asList("/login", "/register", "/logout", "/bootstrap/**", "/fontawesome/**", "/i18n/**", "/css/**", "/js/**", "/content/list/**");
 
     @Autowired
     private AuthenticationInterceptor authenticationInterceptor;
@@ -51,7 +51,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(this.localeChangeInterceptor());
-        registry.addInterceptor(authenticationInterceptor).order(1).excludePathPatterns(ignorePaths);
-        registry.addInterceptor(authorizationInterceptor).order(2).excludePathPatterns(ignorePaths);
+//        registry.addInterceptor(authenticationInterceptor).order(1).excludePathPatterns(ignorePaths);
+//        registry.addInterceptor(authorizationInterceptor).order(2).excludePathPatterns(ignorePaths);
     }
 }

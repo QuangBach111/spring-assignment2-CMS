@@ -25,6 +25,9 @@ public class ContentEntity {
     @Column(length=2000, nullable=false) // Adjusted the length to accommodate larger content
     private String content;
 
+    @Column(length = 20, nullable = false)
+    private String role;
+
     @Column(name="created_date", length=200, nullable=false, updatable=false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDate createdDate;
 

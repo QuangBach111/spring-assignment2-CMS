@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <div th:fragment="html_header">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" th:href="@{/bootstrap-4.6.2/css/bootstrap.min.css}" />
+        <script crossorigin="anonymous" src="https://kit.fontawesome.com/8be79f5c08.js"></script>
+
+
+        <!--	Bootstrap css-->
+        <link rel="stylesheet" type="text/css" th:href="@{/bootstrap/css/bootstrap.min.css}"/>
+
+        <!--	Css-->
+        <link rel="stylesheet" th:href="@{/css/style-main.css}">
+    </div>
+    <title>Layout fragments</title>
+</head>
+<body>
+<div th:fragment="html_navbar">
+    <nav class="navbar navbar-light bg-light justify-content-between">
+        <a th:href="@{content/view-content.html}" class="navbar-brand">CMS</a>
+        <form class="form-inline">
+            <span>
+              <div class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                     aria-expanded="false">
+                    <i class="fa fa-user"></i>
+                  </a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item"
+                       th:href="@{/member/view-information(id=${member.id})}">
+                      <i class="fa-solid fa-user"></i> User Profile
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item"
+                       th:href="@{/member/show-form-update(id=${member.id})}">
+                      <i class="fa-solid fa-user-pen"></i> Edit Profile
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item"
+                       th:href="@{member/change-password.html}">
+                      <i class="fa-solid fa-lock"></i> Change password
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item">
+                      <i class="fa-solid fa-right-to-bracket"></i> Logout
+                    </a>
+                  </div>
+                </div>
+            </span>
+        </form>
+    </nav>
+</div>
+<div th:fragment="html_sidebar">
+
+    <div class="sidebar">
+        <ul class="nav flex-column">
+            <li>
+                <div class="dropdown-divider"></div>
+            </li>
+            <li>
+                <form class="form-inline my-2 my-lg-0">
+                    <label>
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search...">
+                    </label>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="button">
+                        <i class="fa fa-magnifying-glass"></i>
+                    </button>
+                </form>
+            </li>
+            <li>
+                <div class="dropdown-divider"></div>
+            </li>
+            <li>
+                <a class="dropdown-item text-primary" th:href="@{content/view-content.html}">
+                    <i class="fa-solid fa-eye"></i> View contents
+                </a>
+            </li>
+            <li>
+                <div class="dropdown-divider"></div>
+            </li>
+            <li>
+                <a class="dropdown-item text-primary" th:href="@{content/add-content.html}">
+                    <i class="fa-solid fa-pen-to-square"></i> Form content
+                </a>
+            </li>
+            <li>
+                <div class="dropdown-divider"></div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div th:fragment="html_footer">
+    <script th:src="@{/jquery-3.7.0/jquery-3.7.0.js}"></script>
+    <script th:src="@{/bootstrap-4.6.2/js/bootstrap.min.js}"></script>
+
+    <!--  jquery-->
+    <script th:src="@{/js/jquery.js}"></script>
+    <!--  bootstrap js-->
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <!-- Custom JS -->
+    <script th:src="@{/js/content-list.js}"></script>
+</div>
+</body>
+</html>

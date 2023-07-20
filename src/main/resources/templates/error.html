@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+	<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, minimum-scale=1.0"
+	/>
+	<title>Error Page</title>
+	<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+			integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+			crossorigin="anonymous"
+	/>
+</head>
+<body>
+<div class="container text-center">
+	<h1>Error Page</h1>
+
+	<p>Application has encountered an error. Please contact support on ...</p>
+
+	<div>Failed URL: <span th:text="${url}"></span>
+		Exception: <span class="text-danger" th:text="${exception.message}"></span>
+	</div>
+</div>
+</body>
+</html>

@@ -1,8 +1,10 @@
 package com.example.spring.controller;
 
+import com.example.spring.dto.RequestMeta;
 import com.example.spring.entity.ContentEntity;
-import com.example.spring.repository.ContentRepository;
+import com.example.spring.entity.MemberEntity;
 import com.example.spring.service.ContentService;
+import com.example.spring.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
@@ -18,7 +21,14 @@ public class ContentController {
     @Autowired
     ContentService contentService;
     @Autowired
-    private ContentRepository contentRepository;
+    private MemberService memberService;
+
+    @GetMapping("/")
+    public String findIndex(Model model) {
+       List<ContentEntity> contentEntities = contentService.getAllContents();
+       model.addAttribute("contents", contentEntities);
+       return "index";
+    }
 
     @GetMapping("/list/{pageNo}")
     public String findPaginated(@PathVariable("pageNo") int pageNo,
@@ -37,7 +47,7 @@ public class ContentController {
 
 
     @PostMapping("/delete")
-    public String deleteContent(@RequestParam(value = "selectedContentIds", required = false) List<Long> contentIds) {
+    public String deleteContent(@RequestParam(value="selectedContentIds", required=false) List<Long> contentIds) {
         if (contentIds != null && !contentIds.isEmpty()) {
             for (Long contentId : contentIds) {
                 contentService.deleteContentById(contentId);
@@ -71,27 +81,35 @@ public class ContentController {
     }
 
     private static final String REDIRECT_LOCATION = "redirect:/content/list/1";
-    @GetMapping("/")
-    public String home(Model model){
-        return "layout/main";
-    }
+
+//    @GetMapping("/")
+//    public String home(Model model) {
+//        return "layout/main";
+//    }
+
     @GetMapping("/add-content")
-    public String addContent(Model model){
+    public String addContent(Model model) {
         model.addAttribute("content", new ContentEntity());
         return "content/content-add";
     }
+
     @PostMapping("/save-content")
-    public String saveContent(@ModelAttribute ContentEntity contentEntity, BindingResult result, Model model){
+    public String saveContent(@ModelAttribute ContentEntity contentEntity, BindingResult result, Model model, HttpServletRequest request) {
+        Long memberId = ((RequestMeta) request.getAttribute("requestMeta")).getMemberId();
+        MemberEntity member = this.memberService.findMemberById(memberId).get();
+        contentEntity.setMember(member);
         this.contentService.addContent(contentEntity);
         return REDIRECT_LOCATION;
     }
+
     @GetMapping("/show-form-update")
     public String showFormForUpdate(@RequestParam int contentId, Model model) {
         model.addAttribute("content", this.contentService.getContentById((long) contentId));
         return "content/content-edit";
     }
+
     @PostMapping("/update-content")
-    public String doUpdateContent(@ModelAttribute ContentEntity contentEntity, BindingResult bindingResult, Model model){
+    public String doUpdateContent(@ModelAttribute ContentEntity contentEntity, BindingResult bindingResult, Model model) {
         this.contentService.updateContent(contentEntity);
         return REDIRECT_LOCATION;
     }

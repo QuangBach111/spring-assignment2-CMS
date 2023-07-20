@@ -18,17 +18,17 @@ public class MemberController {
     public static final String ATTRIBUTE_MEMBER_NAME="member";
 
     @GetMapping("/view-information")
-    public String viewInformation(@RequestParam int id  , Model model){
+    public String viewInformation(@RequestParam("id") int id  , Model model){
         MemberEntity member = memberService.getOne(id);
         model.addAttribute(ATTRIBUTE_MEMBER_NAME,member);
-        return "profile/view-profile";
+        return "member/view-profile";
     }
 
     @GetMapping("/show-form-update")
     public String showFormForUpdate(@RequestParam int id, Model model){
         MemberEntity member = memberService.getOne(id);
         model.addAttribute(ATTRIBUTE_MEMBER_NAME, member);
-        return "profile/edit-profile";
+        return "member/edit-profile";
     }
 
     @PostMapping("/update-information")

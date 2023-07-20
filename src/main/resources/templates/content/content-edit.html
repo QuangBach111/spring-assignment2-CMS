@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
+
 	  layout:decorate="~{/layout/main}"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
@@ -33,7 +34,7 @@
 <body>
 
 <div class="container">
-	<div layout:fragment="content-edit" class="animated fadeIn">
+	<div layout:fragment="content" class="animated fadeIn">
 		<h1 class="section-heading">Edit Content</h1>
 		<hr>
 		<form method="post" th:action="@{/content/update-content}" th:object="${content}" class="form">

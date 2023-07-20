@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
-	  layout:decorate="~{/layout/main}"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      layout:decorate="~{/layout/main}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
 	<meta charset="UTF-8">
 	<title>Contents List</title>
@@ -25,7 +25,8 @@
 		<div class="w-100">
 			<!-- Search field -->
 			<form class="form-inline animated fadeIn" method="get" th:action="@{/content/search}">
-				<input name="keyword" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+				<input name="keyword" class="form-control mr-sm-2" type="search" placeholder="Search"
+				       aria-label="Search">
 				<button class="btn btn-outline-success my-2 my-sm-0 animated-hover bounce" type="submit">Search</button>
 			</form>
 
@@ -49,20 +50,31 @@
 					</tr>
 					</thead>
 					<tbody>
-					<tr th:each="content_entity, rowStat : ${contents}">
-						<td th:scope="row"><input type="checkbox" name="selectedContentIds" th:value="${content_entity.contentId}"></td>
+					<tr th:each="content_entity: ${contents}">
+						<td th:scope="row"><input type="checkbox" name="selectedContentIds"
+						                          th:value="${content_entity.contentId}"></td>
 						<td th:text="${content_entity.title}"></td>
 						<td th:text="${content_entity.brief}"></td>
 						<td th:text="${content_entity.createdDate}"></td>
-						<td> <!-- Actions column -->
-							<button class="btn btn-outline-danger btn-sm animated-hover bounce" th:attr="data-contentid=${content_entity.contentId}" onclick="confirmDelete(this)">Delete</button>
-							<a class="btn btn-outline-warning btn-sm animated-hover bounce" th:href="@{/content/view/{contentId}(contentId=${content_entity.contentId})}"
-							   >View</a>
-							<a class="btn btn-outline-primary btn-sm animated-hover bounce" th:href="@{/content/edit/{contentId}(contentId=${content_entity.contentId})}">Edit</a>
 
+						<td th:if="${requestMeta != null}">
+							<th:block th:if="${requestMeta.memberId == content_entity.member.memberId}">
+								<!-- Actions column -->
+								<button class="btn btn-outline-danger btn-sm animated-hover bounce"
+								        th:attr="data-contentid=${content_entity.contentId}"
+								        onclick="confirmDelete(this)">
+									Delete
+								</button>
+								<a class="btn btn-outline-warning btn-sm animated-hover bounce"
+								   th:href="@{/content/view/{contentId}(contentId=${content_entity.contentId})}"
+								>View</a>
+								<a class="btn btn-outline-primary btn-sm animated-hover bounce"
+								   th:href="@{/content/edit/{contentId}(contentId=${content_entity.contentId})}">Edit</a>
+							</th:block>
 
 
 						</td>
+
 					</tr>
 					</tbody>
 				</table>
@@ -76,7 +88,7 @@
 							<a class="page-link" th:href="@{/content/list/__${currentPage - 1}__}">Previous</a>
 						</li>
 						<li th:each="page : ${#numbers.sequence(1, totalPages)}"
-							th:class="${page == currentPage} ? 'page-item active' : 'page-item'">
+						    th:class="${page == currentPage} ? 'page-item active' : 'page-item'">
 							<a class="page-link" th:href="@{/content/list/__${page}__}" th:text="${page}"></a>
 						</li>
 						<li th:class="${currentPage == totalPages} ? 'page-item disabled' : 'page-item'">

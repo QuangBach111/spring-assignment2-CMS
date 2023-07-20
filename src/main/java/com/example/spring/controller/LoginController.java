@@ -36,6 +36,7 @@ public class LoginController {
 
         String accessToken = loginService.doLogin(loginDTO);
         if(accessToken == null) {
+            model.addAttribute("error", "Email or Password is not correct!");
             return "login/login-form";
         }
 

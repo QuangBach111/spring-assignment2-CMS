@@ -25,16 +25,13 @@ public class ContentEntity {
     @Column(length=2000, nullable=false) // Adjusted the length to accommodate larger content
     private String content;
 
-    @Column(length = 20, nullable = false)
-    private String role;
-
-    @Column(name="created_date", length=200, nullable=false, updatable=false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    @Column(name="created_date", length=200, updatable=false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDate createdDate;
 
-    @Column(name="updated_time", nullable=false, updatable=false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
+    @Column(name="updated_time", updatable=false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private LocalDate updatedTime;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name="member_id")
     private MemberEntity member;
 }

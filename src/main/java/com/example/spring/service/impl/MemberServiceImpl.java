@@ -1,8 +1,13 @@
 package com.example.spring.service.impl;
 
 import com.example.spring.entity.MemberEntity;
+
+import com.example.spring.model.Register;
+
 import com.example.spring.repository.MemberRepository;
 import com.example.spring.service.MemberService;
+import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -10,11 +15,16 @@ import java.util.Optional;
 @Service
 public class MemberServiceImpl implements MemberService {
 
+    @Autowired
+    private MemberRepository memberRepository;
+
+
     private final MemberRepository memberRepository;
 
     public MemberServiceImpl(MemberRepository memberRepository) {
         this.memberRepository = memberRepository;
     }
+
 
     @Override
     public Optional<MemberEntity> loginMember(String email, String password) {
@@ -39,5 +49,29 @@ public class MemberServiceImpl implements MemberService {
     @Override
     public MemberEntity getOne(int id) {
         return memberRepository.getReferenceById((long) id);
+    }
+
+    @Override
+    public MemberEntity findMemberByEmail(String email) {
+        return memberRepository.findByEmail(email);
+    }
+
+    @Override
+    public MemberEntity findMemberByUsername(String username) {
+        return memberRepository.findByUsername(username);
+    }
+
+    @Override
+    public void saveMember(Register register) {
+        MemberEntity member = new MemberEntity();
+        member.setUsername(register.getUsername());
+        member.setEmail(register.getEmail());
+        member.setPhone(register.getPhone());
+        // Mã hoá password
+        String plainPassword = register.getPassword();
+        String hashedPassword = BCrypt.hashpw(plainPassword, BCrypt.gensalt());
+        member.setPassword(hashedPassword);
+
+        memberRepository.save(member);
     }
 }

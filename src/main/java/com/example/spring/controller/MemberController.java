@@ -35,7 +35,7 @@ public class MemberController {
     public String updateInformation(@ModelAttribute MemberEntity member, BindingResult result, Model model ){
         this.memberService.updateMember(member);
         model.addAttribute(ATTRIBUTE_MEMBER_NAME, member);
-        return "profile/view-profile";
+        return "redirect:/member/view-information";
     }
 
 

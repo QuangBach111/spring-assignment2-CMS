@@ -110,6 +110,8 @@ public class ContentController {
 
     @PostMapping("/update-content")
     public String doUpdateContent(@ModelAttribute ContentEntity contentEntity, BindingResult bindingResult, Model model) {
+        Long memberId = contentEntity.getMember().getMemberId();
+        contentEntity.setMember(this.memberService.findMemberById(memberId).get());
         this.contentService.updateContent(contentEntity);
         return REDIRECT_LOCATION;
     }

@@ -39,7 +39,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
         RequestMeta requestMeta = new RequestMeta();
 
         requestMeta.setMemberId(Long.valueOf(claims.getIssuer()));
-        requestMeta.setName(claims.get("firstName", String.class) + " " + claims.get("lastName", String.class));
+        requestMeta.setUsername(claims.get("username", String.class));
         requestMeta.setEmail(claims.get("email", String.class));
         requestMeta.setRole(claims.get("role", String.class));
 

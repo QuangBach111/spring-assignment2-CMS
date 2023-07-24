@@ -27,8 +27,7 @@ public class JwtUtil {
                             .setIssuer(memberEntity.getMemberId().toString())
                             .setIssuedAt(issueAt)
                             .setExpiration(expiryAt);
-        claims.put("firstName", memberEntity.getFirstName());
-        claims.put("lastName", memberEntity.getLastName());
+        claims.put("username", memberEntity.getUsername());
         claims.put("email", memberEntity.getEmail());
         claims.put("role", memberEntity.getRole());
 

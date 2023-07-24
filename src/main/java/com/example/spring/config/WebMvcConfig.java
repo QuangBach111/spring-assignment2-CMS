@@ -18,7 +18,7 @@ import java.util.Locale;
 
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer {
-    private final List<String> ignorePaths = Arrays.asList("/login", "/register", "/logout", "/bootstrap/**", "/fontawesome/**", "/i18n/**", "/css/**", "/js/**", "/content/");
+    private final List<String> ignorePaths = Arrays.asList("/login", "/register", "/logout", "/bootstrap/**", "/fontawesome/**", "/i18n/**", "/css/**", "/js/**");
 
     @Autowired
     private AuthenticationInterceptor authenticationInterceptor;

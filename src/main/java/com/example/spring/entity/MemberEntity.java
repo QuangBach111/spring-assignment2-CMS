@@ -12,22 +12,26 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
+@Table(name = "members")
 public class MemberEntity {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="member_id", updatable=false)
     private Long memberId;
 
-    @Column(name="first_name", length=100, nullable=false)
+    @Column(name="first_name", length=100)
     private String firstName;
 
-    @Column(name="last_name", length=100, nullable=false)
+    @Column(name="last_name", length=100)
     private String lastName;
+
+    @Column(name = "username", nullable = false, length = 255)
+    private String username;
 
     @Column(name="password", length=100, nullable=false)
     private String password;
 
-    @Column(name="phone", length=100, nullable=false, unique=true)
+    @Column(name="phone", length=100, unique=true)
     private String phone;
 
     @Column(name="email", length=100, nullable=false, unique=true)
@@ -44,6 +48,6 @@ public class MemberEntity {
     @Column(name="updated_time", nullable=false, updatable=false, columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP")
     private LocalDate updatedTime;
 
-    @OneToMany(mappedBy="member")
+    @OneToMany(mappedBy="member", fetch = FetchType.LAZY)
     private List<ContentEntity> contents;
 }

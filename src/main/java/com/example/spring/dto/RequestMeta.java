@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RequestMeta {
     private Long memberId;
-    private String name;
+    private String username;
     private String email;
     private String role;
 }

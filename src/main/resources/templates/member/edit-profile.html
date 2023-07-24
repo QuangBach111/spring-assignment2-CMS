@@ -49,6 +49,14 @@
 					       th:field="*{email}">
 				</div>
 				<div class="form-group">
+					<label class="col-md-3 control-label">Email</label>
+					<div class="col-lg-11">
+						<p th:utext="*{username}">
+					</div>
+					<input class="form-control" type="hidden" id="memberUsername" name="memberUsename"
+					       th:field="*{username}">
+				</div>
+				<div class="form-group">
 					<label class="col-md-3 control-label">Phone</label>
 					<div class="col-md-11">
 						<input class="form-control" type="tel" id="memberPhoneNumber"
@@ -59,6 +67,11 @@
 					<label class="col-md-3 control-label">Description</label>
 					<textarea class="form-control col-md-11" id="memberDescription" name="memberDescription"
 					          th:field="*{description}"></textarea>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Description</label>
+					<textarea type="hidden" class="form-control col-md-11"  name="memberDescription"
+					          th:field="*{role}"></textarea>
 				</div>
 				<div class="form-group">
 					<div class="col-md-11">

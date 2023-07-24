@@ -24,14 +24,14 @@
 			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
 			   aria-haspopup="true" aria-expanded="false">
 				<span th:if="${requestMeta == null}"><i class="fa-solid fa-user"></i></span>
-				<span th:unless="${requestMeta == null}" th:text="${requestMeta.role}"></span>
+				<span th:if="${requestMeta != null}" th:text="${requestMeta.username}"></span>
 			</a>
 			<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 				<a class="dropdown-item" th:if="${requestMeta == null}" th:href="@{/login}">Login</a>
 				<a class="dropdown-item" th:unless="${requestMeta == null}" th:href="@{/member/view-information(id=${requestMeta.memberId})}">User Detail</a>
 				<div class="dropdown-divider"></div>
 				<a class="dropdown-item" th:unless="${requestMeta == null}" th:href="@{/logout}">Logout</a>
-				<a class="dropdown-item" th:if="${requestMeta == null}" th:href="@{#}">Register</a>
+				<a class="dropdown-item" th:if="${requestMeta == null}" th:href="@{/register}">Register</a>
 			</div>
 		</div>
 	</nav>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <div th:fragment="html_header">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}" />
+        <script crossorigin="anonymous" src="https://kit.fontawesome.com/8be79f5c08.js"></script>
+    </div>
+    <title>Layout fragments</title>
+</head>
+<body>
+<div th:fragment="html_navbar">
+    <nav class="navbar navbar-light bg-light justify-content-between">
+        <a th:href="@{content/view-content.html}" class="navbar-brand">CMS</a>
+        <form th:switch="${#session.getAttribute('RequestMeta.role')}" class="form-inline">
+            <span th:case="'null'">
+              <div class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                     aria-expanded="false">
+                    <i class="fa-solid fa-bars"></i> Menu
+                  </a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" th:href="@{login/login.html}">
+                      <i class="fa-solid fa-right-to-bracket"></i> Login
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" th:href="@{register/register.html}">
+                      <i class="fa-solid fa-registered"></i> Register
+                    </a>
+                  </div>
+                </div>
+            </span>
+            <span th:case="'MEMBER'">
+              <div class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                     aria-expanded="false">
+                    <i class="fa-solid fa-user"></i> <span th:text="${member.getFirstName + ' ' + member.getLastName}"></span>
+                  </a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item"
+                       th:href="@{profile/view-profile.html}">
+                      <i class="fa-solid fa-user"></i> User Profile
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item"
+                       th:href="@{profile/edit-profile.html}">
+                      <i class="fa-solid fa-pen-to-square"></i> Edit Profile
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item"
+                       th:href="@{profile/change-password.html}">
+                      <i class="fa-solid fa-pen-to-square"></i> Change password
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item">
+                      <i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </a>
+                  </div>
+                </div>
+            </span>
+            <span th:case="'ADMIN'">
+              <div class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown"
+                     aria-expanded="false">
+                    <i class="fa-solid fa-user"></i> <span th:utext="Admin"></span>
+                  </a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item"
+                       th:href="@{profile/view-profile.html}">
+                      <i class="fa-solid fa-user"></i> Admin Profile
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item"
+                       th:href="@{profile/edit-profile.html}">
+                      <i class="fa-solid fa-pen-to-square"></i> Edit Profile
+                    </a>
+                    <div class="dropdown-divider"></div>
+                      <a class="dropdown-item"
+                         th:href="@{member/view-member.html}">
+                      <i class="fa-solid fa-user"></i> View Member
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item"
+                       th:href="@{profile/change-password.html}">
+                      <i class="fa-solid fa-pen-to-square"></i> Change password
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item">
+                      <i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </a>
+                  </div>
+                </div>
+            </span>
+        </form>
+    </nav>
+    <p th:text="#"></p>
+</div>
+<div th:fragment="html_sidebar">
+    <div class="sidebar">
+        <ul class="nav flex-column">
+            <li>
+                <div class="dropdown-divider"></div>
+            </li>
+            <li>
+                <form class="form-inline my-2 my-lg-0">
+                    <label>
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search...">
+                    </label>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="button">
+                        <i class="fa fa-magnifying-glass"></i>
+                    </button>
+                </form>
+            </li>
+            <li>
+                <div class="dropdown-divider"></div>
+            </li>
+            <li>
+                <a class="dropdown-item text-primary" th:href="@{content/view-content.html}">
+                    <i class="fa-solid fa-eye"></i> View contents
+                </a>
+            </li>
+            <li>
+                <div class="dropdown-divider"></div>
+            </li>
+            <li>
+                <a class="dropdown-item text-primary" th:href="@{content/add-content.html}">
+                    <i class="fa-solid fa-pen-to-square"></i> Form content
+                </a>
+            </li>
+            <li>
+                <div class="dropdown-divider"></div>
+            </li>
+        </ul>
+    </div>
+</div>
+<div th:fragment="html_footer">
+    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+</div>
+</body>
+</html>

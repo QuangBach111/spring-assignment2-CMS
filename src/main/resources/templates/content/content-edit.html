@@ -1,10 +1,78 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+
+	  layout:decorate="~{/layout/main}"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
 <head>
 	<meta charset="UTF-8">
-	<title>Title</title>
+	<title>Edit Content</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<style>
+		body {
+			padding-top: 20px;
+		}
+
+		.container {
+			max-width: 800px;
+			margin: 0 auto;
+		}
+
+		.section-box {
+			border: 1px solid #e9e9e9;
+			border-radius: 5px;
+			padding: 20px;
+			margin-bottom: 20px;
+		}
+
+		.section-heading {
+			margin-bottom: 20px;
+		}
+	</style>
 </head>
+
 <body>
 
+<div class="container">
+	<div layout:fragment="content" class="animated fadeIn">
+		<h1 class="section-heading">Edit Content</h1>
+		<hr>
+		<form method="post" th:action="@{/content/update-content}" th:object="${content}" class="form">
+			<input type="hidden" th:field="*{contentId}" />
+
+			<div class="row">
+				<div class="col-md-12 section-box">
+					<h5 class="section-heading d-inline">Title:</h5>
+					<input type="text" th:field="*{title}" required />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 section-box">
+					<h5 class="section-heading d-inline">Brief:</h5>
+					<input type="text" th:field="*{brief}" required />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 section-box">
+					<h5 class="section-heading d-inline">Content:</h5>
+					<textarea th:field="*{content}" required></textarea>
+				</div>
+			</div>
+			<div class="col-lg-11">
+				<input class="form-control" type="hidden" id="memberId"
+				       th:field="*{member.memberId}">
+			</div>
+
+			<div class="row">
+				<div class="col-md-12">
+					<input type="submit" value="Save" class="btn btn-primary animated-hover bounce" />
+					<a class="btn btn-outline-primary animated-hover bounce" th:href="@{/content/view/{contentId}(contentId=${content.contentId})}">Cancel</a>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </body>
 </html>

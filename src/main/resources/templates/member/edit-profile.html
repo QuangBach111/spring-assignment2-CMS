@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{/layout/main}"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+	<title>Edit Profile</title>
+</head>
+<body>
+<div class="container-fluid" layout:fragment="content">
+	<h3>Edit Profile</h3>
+	<div class="dropdown-divider"></div>
+	<div class="card mt-2 mt-3">
+		<div class="card-header">Profile Form Elements</div>
+		<div class="card-body">
+			<form class="form-horizontal" th:action="@{/member/update-information}" method="post" th:object="${member}">
+				<div class="form-group">
+					<div class="col-lg-11">
+						<input class="form-control" type="hidden" id="memberId" name="memberId"
+						       th:field="*{memberId}">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3 control-label">First name</label>
+					<div class="col-lg-11">
+						<input class="form-control" type="text" id="memberFirstName" name="memberFirstName"
+						       th:field="*{firstName}">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-lg-3 control-label">Last name</label>
+					<div class="col-lg-11">
+						<input class="form-control" type="text" id="memberLastName" name="memberLastName"
+						       th:field="*{lastName}">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-lg-11">
+						<input class="form-control" type="hidden" id="memberPassword" name="memberPassword"
+						       th:field="*{password}">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Email</label>
+					<div class="col-lg-11">
+						<p th:utext="*{email}">
+					</div>
+					<input class="form-control" type="hidden" id="memberEmail" name="memberEmail"
+					       th:field="*{email}">
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Email</label>
+					<div class="col-lg-11">
+						<p th:utext="*{username}">
+					</div>
+					<input class="form-control" type="hidden" id="memberUsername" name="memberUsename"
+					       th:field="*{username}">
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Phone</label>
+					<div class="col-md-11">
+						<input class="form-control" type="tel" id="memberPhoneNumber"
+						       name="memberPhoneNumber" th:field="*{phone}">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Description</label>
+					<textarea class="form-control col-md-11" id="memberDescription" name="memberDescription"
+					          th:field="*{description}"></textarea>
+				</div>
+				<div class="form-group">
+					<label class="col-md-3 control-label">Description</label>
+					<textarea type="hidden" class="form-control col-md-11"  name="memberDescription"
+					          th:field="*{role}"></textarea>
+				</div>
+				<div class="form-group">
+					<div class="col-md-11">
+						<button type="submit" class="btn btn-success"
+						        onclick="if (!(confirm('Are you sure you want to change your information?'))) return false">
+							Submit Button
+						</button>
+						<span></span>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+</body>
+</html>
